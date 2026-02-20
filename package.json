@@ -1,5 +1,5 @@
 {
-  "name": "@tinyland-inc/tinyland-metrics-collectors",
+  "name": "@tummycrypt/tinyland-metrics-collectors",
   "version": "0.1.0",
   "description": "Application metrics collectors for process, session, auth, accessibility, and client metrics",
   "type": "module",
@@ -12,7 +12,10 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "LICENSE"],
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -37,5 +40,9 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
