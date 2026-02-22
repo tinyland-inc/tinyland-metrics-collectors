@@ -1,6 +1,6 @@
 {
   "name": "@tummycrypt/tinyland-metrics-collectors",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Application metrics collectors for process, session, auth, accessibility, and client metrics",
   "type": "module",
   "main": "./dist/index.js",
