@@ -27,7 +27,7 @@ describe('MetricsCollectors Config', () => {
     it('should have a no-op MetricsWriter by default', () => {
       const config = getMetricsCollectorsConfig();
       expect(config.metricsWriter).toBeDefined();
-      // Should not throw when called
+      
       expect(() => config.metricsWriter.setGauge('test', 1)).not.toThrow();
     });
 

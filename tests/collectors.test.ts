@@ -154,7 +154,7 @@ describe('collectProcessMetrics', () => {
   it('should set nodejs_active_requests gauge if available', () => {
     collectProcessMetrics();
     const call = findCall(mock.calls, 'nodejs_active_requests');
-    // This may or may not exist depending on Node.js version
+    
     if (call) {
       expect(call.value).toBeGreaterThanOrEqual(0);
     }
@@ -163,7 +163,7 @@ describe('collectProcessMetrics', () => {
   it('should set nodejs_active_handles gauge if available', () => {
     collectProcessMetrics();
     const call = findCall(mock.calls, 'nodejs_active_handles');
-    // This may or may not exist depending on Node.js version
+    
     if (call) {
       expect(call.value).toBeGreaterThanOrEqual(0);
     }
@@ -330,7 +330,7 @@ describe('collectSessionMetrics', () => {
   });
 
   it('should set all to 0 when file does not exist', async () => {
-    // Do not write sessions file
+    
     await collectSessionMetrics();
     expect(findCall(mock.calls, 'session_active')!.value).toBe(0);
     expect(findCall(mock.calls, 'session_created_total')!.value).toBe(0);
@@ -417,7 +417,7 @@ describe('collectSessionMetrics', () => {
     ]);
     await collectSessionMetrics();
     const call = findCall(mock.calls, 'session_avg_duration_seconds');
-    // Average of ~7200s and ~3600s should be ~5400s
+    
     expect(call!.value).toBeGreaterThan(5000);
     expect(call!.value).toBeLessThan(5800);
   });
@@ -921,15 +921,15 @@ describe('collectAllMetrics', () => {
 
   it('should call all 5 individual collectors', async () => {
     await collectAllMetrics();
-    // Process metrics: at least 6 gauges
+    
     expect(findCall(mock.calls, 'nodejs_heap_size_bytes')).toBeDefined();
-    // Session metrics: 4 gauges (error path sets to 0)
+    
     expect(findCall(mock.calls, 'session_active')).toBeDefined();
-    // Auth metrics: 10 gauges (error path)
+    
     expect(findCall(mock.calls, 'auth_login_attempts_total')).toBeDefined();
-    // Accessibility metrics: at least 6 gauges
+    
     expect(findCall(mock.calls, 'accessibility_issues_total')).toBeDefined();
-    // Client metrics: 5 gauges
+    
     expect(findCall(mock.calls, 'client_connected_total')).toBeDefined();
   });
 
@@ -942,7 +942,7 @@ describe('collectAllMetrics', () => {
   it('should produce gauges from all collector categories', async () => {
     await collectAllMetrics();
     const gaugeNames = new Set(mock.calls.map((c) => c.name));
-    // Should have process, session, auth, accessibility, and client gauges
+    
     expect(gaugeNames.has('nodejs_heap_size_bytes')).toBe(true);
     expect(gaugeNames.has('session_active')).toBe(true);
     expect(gaugeNames.has('auth_login_attempts_total')).toBe(true);
@@ -956,7 +956,7 @@ describe('collectAllMetrics', () => {
   });
 
   it('should produce at least 25 gauge calls', async () => {
-    // Process: ~6-8, Session: 4, Auth: 10, Accessibility: 6, Client: 5 = ~31+
+    
     await collectAllMetrics();
     expect(mock.calls.length).toBeGreaterThanOrEqual(25);
   });
