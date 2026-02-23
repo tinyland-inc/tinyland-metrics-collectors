@@ -2,10 +2,10 @@ import { promises as fs } from 'fs';
 import { join } from 'path';
 import { getMetricsCollectorsConfig } from './config.js';
 
-/**
- * Collects Node.js process metrics: heap, RSS, external memory,
- * active requests/handles, and uptime.
- */
+
+
+
+
 export function collectProcessMetrics(): void {
   const { metricsWriter } = getMetricsCollectorsConfig();
   const memUsage = process.memoryUsage();
@@ -31,10 +31,10 @@ export function collectProcessMetrics(): void {
   metricsWriter.setGauge('nodejs_uptime_seconds', process.uptime());
 }
 
-/**
- * Collects session metrics from the sessions.json file:
- * active sessions, total created, recently expired, and average duration.
- */
+
+
+
+
 export async function collectSessionMetrics(): Promise<void> {
   const { metricsWriter, baseDir } = getMetricsCollectorsConfig();
 
@@ -80,10 +80,10 @@ export async function collectSessionMetrics(): Promise<void> {
   }
 }
 
-/**
- * Collects accessibility metrics from the configured provider:
- * total issues, critical issues, by-type breakdowns, and per-component/page/theme.
- */
+
+
+
+
 export function collectAccessibilityMetrics(): void {
   const { metricsWriter, getAccessibilityMetrics } = getMetricsCollectorsConfig();
   const metrics = getAccessibilityMetrics();
@@ -108,10 +108,10 @@ export function collectAccessibilityMetrics(): void {
   });
 }
 
-/**
- * Collects authentication metrics from the audit.json log:
- * login/TOTP attempts, successes, failures, backup code usage, and success rates.
- */
+
+
+
+
 export async function collectAuthMetrics(): Promise<void> {
   const { metricsWriter, baseDir } = getMetricsCollectorsConfig();
 
@@ -170,9 +170,9 @@ export async function collectAuthMetrics(): Promise<void> {
   }
 }
 
-/**
- * Collects client-side placeholder metrics (all zeroed).
- */
+
+
+
 export function collectClientMetrics(): void {
   const { metricsWriter } = getMetricsCollectorsConfig();
   metricsWriter.setGauge('client_connected_total', 0);
@@ -182,9 +182,9 @@ export function collectClientMetrics(): void {
   metricsWriter.setGauge('client_lcp_avg_ms', 0);
 }
 
-/**
- * Collects all metrics: process, session, auth, accessibility, and client.
- */
+
+
+
 export async function collectAllMetrics(): Promise<void> {
   collectProcessMetrics();
   await collectSessionMetrics();

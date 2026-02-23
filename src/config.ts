@@ -19,24 +19,24 @@ function createDefaultConfig(): MetricsCollectorsConfig {
 
 let _config: MetricsCollectorsConfig = createDefaultConfig();
 
-/**
- * Configure the metrics collectors with partial or full configuration.
- * Merges provided fields into the current config.
- */
+
+
+
+
 export function configureMetricsCollectors(config: Partial<MetricsCollectorsConfig>): void {
   _config = { ..._config, ...config };
 }
 
-/**
- * Returns the current metrics collectors configuration.
- */
+
+
+
 export function getMetricsCollectorsConfig(): MetricsCollectorsConfig {
   return _config;
 }
 
-/**
- * Resets configuration to defaults (no-op writer, no-op accessibility, process.cwd()).
- */
+
+
+
 export function resetMetricsCollectorsConfig(): void {
   _config = createDefaultConfig();
 }
